@@ -1,12 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import {Controller, Get} from '@nestjs/common';
+import {getProcessUptime} from './utils/time.utils';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+    @Get('health')
+    getHealth() {
+        const uptime = getProcessUptime();
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+        return {
+            status: 'OK',
+            timestamp: new Date().toISOString(),
+            environment: process.env.NODE_ENV || 'development',
+            uptime: uptime.formatted,
+            uptimeSeconds: uptime.seconds,
+        };
+    }
 }
