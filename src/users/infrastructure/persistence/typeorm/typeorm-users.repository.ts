@@ -23,12 +23,19 @@ export class TypeOrmUsersRepository implements UsersRepository {
   }
 
   async findById(id: number): Promise<UserAggregate | null> {
-    const row = await this.repo.findOne({ where: { id } });
+    const qb = this.repo
+      .createQueryBuilder('u')
+      .where('u.id = :id', { id })
+      .addSelect(['u.passwordHash', 'u.passwordSalt']);
+    const row = await qb.getOne();
     return row ? toDomain(row) : null;
   }
 
   async list(): Promise<UserAggregate[]> {
-    const rows = await this.repo.find();
+    const rows = await this.repo
+      .createQueryBuilder('u')
+      .addSelect(['u.passwordHash', 'u.passwordSalt'])
+      .getMany();
     return rows.map(toDomain);
   }
 
