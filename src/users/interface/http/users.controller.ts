@@ -10,6 +10,7 @@ import {
 import { JwtAuthGuard } from '../../../auth/interface/security/guards/jwt-auth.guard';
 import { Roles } from '../../../auth/interface/security/decorators/roles.decorator';
 import { CurrentUser } from '../../../auth/interface/security/decorators/current-user.decorator';
+import { RolesGuard } from '../../../auth/interface/security/guards/roles.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserUseCase } from '../../application/use-cases/create-user.use-case';
 import { ListUsersUseCase } from '../../application/use-cases/list-users.use-case';
@@ -18,7 +19,7 @@ import {
   EmailAlreadyTakenError,
   InvalidEmailError,
 } from '../../domain/errors/user.errors';
-import {Role} from "../../domain/aggregates/user.aggregate";
+import { Role } from '../../domain/aggregates/user.aggregate';
 
 @Controller('users')
 export class UsersController {
@@ -27,7 +28,7 @@ export class UsersController {
     private readonly listUsers: ListUsersUseCase,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.admin, Role.user)
   @Get('me')
   me(
@@ -37,14 +38,14 @@ export class UsersController {
     return user;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.admin)
   @Get()
   findAll() {
     return this.listUsers.execute();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.admin)
   @Post()
   async create(@Body() dto: CreateUserDto) {

@@ -10,7 +10,7 @@ import { FindUserByIdUseCase } from '../../../application/use-cases/find-user-by
 import { UpdateLastLoginUseCase } from '../../../application/use-cases/update-last-login.use-case';
 import { PASSWORD_HASHER } from '../../../domain/ports/password-hasher';
 import { ScryptPasswordHasher } from '../../security/scrypt-password-hasher.service';
-import {User} from "../../persistence/typeorm/user.orm-entity";
+import { User } from '../../persistence/typeorm/user.orm-entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],

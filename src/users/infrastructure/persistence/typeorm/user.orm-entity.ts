@@ -6,7 +6,7 @@ import {
   Index,
 } from 'typeorm';
 
-import {Role} from "../../../domain/aggregates/user.aggregate";
+import { Role } from '../../../domain/aggregates/user.aggregate';
 
 @Entity('users')
 export class User {

@@ -6,8 +6,12 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { UsersModule } from './users/infrastructure/frameworks/nest/users.module';
 import { AuthModule } from './auth/infrastructure/frameworks/nest/auth.module';
-import { RolesGuard } from './auth/interface/security/guards/roles.guard';
-import {User} from "./users/infrastructure/persistence/typeorm/user.orm-entity";
+import { User } from './users/infrastructure/persistence/typeorm/user.orm-entity';
+import { Station } from './stations/infrastructure/persistence/typeorm/station.orm-entity';
+import { StationsModule } from './stations/infrastructure/frameworks/nest/stations.module';
+import { Trip } from './trips/infrastructure/persistence/typeorm/trip.orm-entity';
+import { StopTime } from './trips/infrastructure/persistence/typeorm/trip_stop_time.orm-entity';
+import { TripsModule } from './trips/infrastructure/frameworks/nest/trips.module';
 
 @Module({
   imports: [
@@ -27,13 +31,14 @@ import {User} from "./users/infrastructure/persistence/typeorm/user.orm-entity";
         database: configService.get<string>('DB_NAME'),
         synchronize: true,
         schema: 'public',
-        entities: [User],
-        // ssl: { rejectUnauthorized: false },
+        entities: [User, Station, Trip, StopTime],
       }),
       inject: [ConfigService],
     }),
     UsersModule,
     AuthModule,
+    StationsModule,
+    TripsModule,
   ],
   controllers: [AppController],
 
@@ -41,10 +46,6 @@ import {User} from "./users/infrastructure/persistence/typeorm/user.orm-entity";
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
     },
   ],
 })

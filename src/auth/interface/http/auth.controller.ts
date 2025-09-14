@@ -20,8 +20,8 @@ import {
   InvalidEmailError,
 } from '../../../users/domain/errors/user.errors';
 import { LoginUseCase } from '../../application/use-cases/login.use-case';
-import {JwtAuthGuard} from "../security/guards/jwt-auth.guard";
-import {CurrentUser} from "../security/decorators/current-user.decorator";
+import { JwtAuthGuard } from '../security/guards/jwt-auth.guard';
+import { CurrentUser } from '../security/decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {

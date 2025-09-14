@@ -1,9 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
-import {
-    ValidateUserCredentialsUseCase
-} from "../../../../../users/application/use-cases/validate-user-credentials.use-case";
+import { ValidateUserCredentialsUseCase } from '../../../../../users/application/use-cases/validate-user-credentials.use-case';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {

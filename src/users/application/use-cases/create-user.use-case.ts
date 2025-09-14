@@ -4,7 +4,7 @@ import {
   UsersRepository,
   SafeUserDTO,
 } from '../../domain/repositories/users.repository';
-import {Role, UserAggregate} from '../../domain/aggregates/user.aggregate';
+import { Role, UserAggregate } from '../../domain/aggregates/user.aggregate';
 import { toSafeDTO } from '../mappers/user.mapper';
 import {
   PASSWORD_HASHER,
