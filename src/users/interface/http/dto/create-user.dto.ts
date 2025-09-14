@@ -6,7 +6,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
-import {Role} from "../../../domain/aggregates/user.aggregate";
+import { Role } from '../../../domain/aggregates/user.aggregate';
 
 export class CreateUserDto {
   @IsString()

@@ -3,8 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import type { Request } from 'express';
-import {SafeUserDTO} from "../../../../../users/domain/repositories/users.repository";
-import {FindUserByIdUseCase} from "../../../../../users/application/use-cases/find-user-by-id.use-case";
+import { SafeUserDTO } from '../../../../../users/domain/repositories/users.repository';
+import { FindUserByIdUseCase } from '../../../../../users/application/use-cases/find-user-by-id.use-case';
 
 export interface JwtPayload {
   sub: number;
