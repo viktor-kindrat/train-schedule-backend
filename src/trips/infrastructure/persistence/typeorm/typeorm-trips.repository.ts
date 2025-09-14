@@ -103,14 +103,8 @@ export class TypeOrmTripsRepository implements TripsRepository {
       qb.andWhere(':dow = ANY(t.days)', { dow });
     }
 
-    if (query.sort === 'firstDeparture') {
-      qb.leftJoin(StopTime, 'fst', 'fst.tripId = t.id AND fst.seq = 1').orderBy(
-        'fst.departure',
-        'ASC',
-        'NULLS LAST',
-      );
-    } else {
-      qb.orderBy('t.trainNo', 'ASC', 'NULLS LAST');
+    if (query.sort === 'trainNo') {
+      qb.orderBy('LOWER(t.trainNo) COLLATE "und-x-icu"', 'ASC', 'NULLS LAST');
     }
 
     const [items, total] = await qb

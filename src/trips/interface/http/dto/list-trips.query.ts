@@ -41,6 +41,6 @@ export class ListTripsQueryDto {
   activeOnDate?: string; // YYYY-MM-DD
 
   @IsOptional()
-  @IsIn(['trainNo', 'firstDeparture'])
-  sort?: 'trainNo' | 'firstDeparture';
+  @IsIn(['trainNo'])
+  sort?: 'trainNo';
 }

@@ -9,7 +9,7 @@ export type ListTripsQuery = {
   trainNo?: string;
   stationCode?: string;
   activeOnDate?: string;
-  sort?: 'trainNo' | 'firstDeparture';
+  sort?: 'trainNo';
 };
 
 export type PagedResult<T> = {
