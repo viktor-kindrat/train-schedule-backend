@@ -150,5 +150,3 @@ Below are the main routes. All paths start with /api/v1.
 - Use secure HTTPS (cookie secure=true in production).
 - Consider enabling migrations instead of synchronize for the DB.
 
-## License
-This repository is marked as UNLICENSED in package.json. If you plan to open source it — add a proper LICENSE file and change the license field in package.json.
